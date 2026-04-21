@@ -1,12 +1,797 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Site</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Program Landing Page</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #06070a;
+      --panel: rgba(255,255,255,0.06);
+      --panel-2: rgba(255,255,255,0.08);
+      --text: #f4f7fb;
+      --muted: #a6afbb;
+      --line: rgba(255,255,255,0.12);
+      --accent: #d8b14a;
+      --accent-2: #f0d27b;
+      --success: #7edb9b;
+      --shadow: 0 24px 70px rgba(0,0,0,0.45);
+      --max: 1240px;
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(216,177,74,0.14), transparent 35%),
+        radial-gradient(circle at top right, rgba(255,255,255,0.06), transparent 25%),
+        linear-gradient(180deg, #040507 0%, #080a0d 40%, #06070a 100%);
+      color: var(--text);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(16px);
+      background: rgba(4,5,7,0.66);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 74px;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-size: 0.92rem;
+    }
+
+    .brand-mark {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 24px rgba(216,177,74,0.6);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--text); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary {
+      color: #141414;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 10px 40px rgba(216,177,74,0.18);
+    }
+    .btn-secondary {
+      background: rgba(255,255,255,0.04);
+      border-color: var(--line);
+      color: var(--text);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 92vh;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-media {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .hero-media video,
+    .hero-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%) contrast(1.05) brightness(0.42);
+      transform: scale(1.03);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.42) 36%, rgba(0,0,0,0.78) 76%, #06070a 100%),
+        radial-gradient(circle at center, rgba(216,177,74,0.08), transparent 34%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 130px 0 72px;
+      width: 100%;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.04);
+      border-radius: 999px;
+      color: #d9dee6;
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 0.9fr;
+      gap: 40px;
+      align-items: end;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(3rem, 9vw, 7.25rem);
+      line-height: 0.92;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+      max-width: 9ch;
+    }
+
+    .hero h1 span { color: var(--accent-2); }
+
+    .hero-copy {
+      padding-bottom: 12px;
+    }
+
+    .hero-copy p {
+      margin: 0 0 28px;
+      max-width: 640px;
+      color: #d1d7e0;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .hero-panel {
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 28px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-panel h3 {
+      margin: 0 0 10px;
+      font-size: 0.92rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+    }
+
+    .hero-panel p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 0.97rem;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .stat {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .stat .value {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .stat .label {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.4;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    section {
+      padding: 88px 0;
+      position: relative;
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 30px;
+      align-items: start;
+      margin-bottom: 34px;
+    }
+
+    .section-header h2 {
+      margin: 0;
+      font-size: clamp(1.8rem, 4vw, 3.4rem);
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+    }
+
+    .section-header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.02rem;
+      line-height: 1.8;
+      max-width: 72ch;
+    }
+
+    .quote-card {
+      border-left: 4px solid var(--accent);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 28px 28px 28px 24px;
+      color: #e6ebf2;
+      font-size: 1.18rem;
+      line-height: 1.8;
+      box-shadow: var(--shadow);
+    }
+
+    .quote-card footer {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .timeline-card {
+      position: relative;
+      padding: 24px;
+      min-height: 290px;
+      border-radius: 26px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.04));
+      border: 1px solid rgba(255,255,255,0.12);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .timeline-card::before {
+      content: "";
+      position: absolute;
+      inset: auto -40px -40px auto;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(216,177,74,0.22), transparent 70%);
+    }
+
+    .phase {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      margin-bottom: 22px;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      color: var(--success);
+    }
+
+    .status.upcoming { color: var(--accent-2); }
+
+    .timeline-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.25rem;
+    }
+
+    .timeline-card time {
+      display: block;
+      margin-bottom: 14px;
+      color: #d4dae2;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .timeline-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .resource-grid,
+    .faq-grid,
+    .people-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      border-radius: 24px;
+      padding: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 1.18rem;
+    }
+
+    .card p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent-2);
+      font-weight: 700;
+    }
+
+    .people-grid .card {
+      min-height: 210px;
+    }
+
+    .number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(216,177,74,0.12);
+      border: 1px solid rgba(216,177,74,0.34);
+      color: var(--accent-2);
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .faq-item summary {
+      list-style: none;
+      cursor: pointer;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: "+";
+      font-size: 1.4rem;
+      color: var(--accent-2);
+      line-height: 1;
+    }
+
+    .faq-item[open] summary::after { content: "−"; }
+
+    .faq-item .answer {
+      margin-top: 16px;
+      color: var(--muted);
+      line-height: 1.75;
+      border-top: 1px solid var(--line);
+      padding-top: 16px;
+    }
+
+    .cta {
+      padding-bottom: 104px;
+    }
+
+    .cta-box {
+      padding: 34px;
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background:
+        radial-gradient(circle at top right, rgba(216,177,74,0.14), transparent 35%),
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .cta-box h2 {
+      margin: 0 0 10px;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+    }
+
+    .cta-box p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 60ch;
+    }
+
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 24px 0 40px;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid,
+      .section-header,
+      .cta-box {
+        grid-template-columns: 1fr;
+        display: grid;
+      }
+
+      .timeline { grid-template-columns: repeat(2, 1fr); }
+      .resource-grid,
+      .faq-grid,
+      .people-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 720px) {
+      .nav-inner {
+        padding: 12px 0;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links { gap: 14px; }
+      .hero { min-height: auto; }
+      .hero-content { padding: 120px 0 56px; }
+      .stats,
+      .timeline,
+      .resource-grid,
+      .faq-grid,
+      .people-grid { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .btn { width: 100%; }
+      section { padding: 72px 0; }
+    }
+  </style>
 </head>
 <body>
-  <h1>Hello world</h1>
-  <p>My website is live on GitHub Pages.</p>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="Homepage">
+        <span class="brand-mark"></span>
+        <span>Program Name</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#overview" class="active">Overview</a>
+        <a href="#timeline">Timeline</a>
+        <a href="#participants">Participants</a>
+        <a href="#resources">Resources</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-media" aria-hidden="true">
+        <!-- Replace poster.jpg or video.mp4 with your own assets -->
+        <!-- Option A: background video -->
+        <video autoplay muted loop playsinline poster="poster.jpg">
+          <source src="video.mp4" type="video/mp4" />
+        </video>
+        <!-- Option B: if you do not want video, comment the <video> above and uncomment the image below -->
+        <!-- <img src="poster.jpg" alt=""> -->
+      </div>
+      <div class="hero-overlay"></div>
+
+      <div class="container hero-content">
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow">Now Open • National Challenge</div>
+            <h1>Build the <span>Future</span> Faster</h1>
+          </div>
+
+          <aside class="hero-copy">
+            <p>
+              This landing page is styled after the same visual approach: cinematic hero media,
+              dark government-tech aesthetic, large typography, section-based storytelling, and
+              clean call-to-action blocks.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#resources">View Resources</a>
+              <a class="btn btn-secondary" href="#timeline">See Timeline</a>
+            </div>
+
+            <div class="hero-panel" style="margin-top: 22px;">
+              <h3>Program Snapshot</h3>
+              <p>Use this box for the quick, persuasive summary that explains what the program is, why it matters, and what action you want visitors to take.</p>
+              <div class="stats">
+                <div class="stat">
+                  <div class="value">4</div>
+                  <div class="label">Challenge Phases</div>
+                </div>
+                <div class="stat">
+                  <div class="value">2026</div>
+                  <div class="label">Launch Year</div>
+                </div>
+                <div class="stat">
+                  <div class="value">$X</div>
+                  <div class="label">Funding Target</div>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="overview">
+      <div class="container">
+        <div class="section-header">
+          <h2>Overview</h2>
+          <p>
+            The reference site uses a strong, public-facing narrative voice with minimal clutter.
+            Keep this section tight: one short background paragraph, one paragraph on program intent,
+            and one paragraph on what happens next.
+          </p>
+        </div>
+
+        <div class="quote-card">
+          “Insert a sharp statement here that sounds mission-oriented, urgent, and unmistakably tied to your program.”
+          <footer>— Senior leader, office, or program authority</footer>
+        </div>
+      </div>
+    </section>
+
+    <section id="timeline">
+      <div class="container">
+        <div class="section-header">
+          <h2>Program Timeline</h2>
+          <p>
+            This mirrors the four-phase card layout on the reference page, but with a more polished reusable structure. Replace dates, statuses, and descriptions with your actual milestones.
+          </p>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-card">
+            <div class="phase">0</div>
+            <div class="status">Completed</div>
+            <h3>Release</h3>
+            <time datetime="2026-05-01">May 1, 2026</time>
+            <p>Official challenge announcement, release package, initial guidance, and opening of the vendor information period.</p>
+          </article>
+
+          <article class="timeline-card">
+            <div class="phase">I</div>
+            <div class="status">Completed</div>
+            <h3>Gauntlet I</h3>
+            <time datetime="2026-07-15">July 15, 2026</time>
+            <p>First iterative event focused on operational performance, manufacturability, and mission execution under defined test conditions.</p>
+          </article>
+
+          <article class="timeline-card">
+            <div class="phase">II</div>
+            <div class="status upcoming">Coming Soon</div>
+            <h3>Gauntlet II</h3>
+            <time datetime="2026-11-01">Approx. 6 months later</time>
+            <p>Second event expands participation, tightens mission criteria, and incorporates lessons learned from the first phase.</p>
+          </article>
+
+          <article class="timeline-card">
+            <div class="phase">III</div>
+            <div class="status upcoming">Upcoming</div>
+            <h3>Final Evaluation</h3>
+            <time datetime="2027-04-01">Approx. 6 months later</time>
+            <p>Final cycle validates readiness, scalability, and sustained ability to deliver solutions that meet mission demand.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="participants">
+      <div class="container">
+        <div class="section-header">
+          <h2>Participants</h2>
+          <p>
+            The live site has dedicated navigation for participants and leaderboard views. If you want that same feel, use cards for eligibility, onboarding, and competition expectations.
+          </p>
+        </div>
+
+        <div class="people-grid">
+          <div class="card">
+            <div class="number">1</div>
+            <h3>Who Can Apply</h3>
+            <p>Explain what types of organizations, teams, or vendors can participate, along with any restrictions or minimum requirements.</p>
+          </div>
+          <div class="card">
+            <div class="number">2</div>
+            <h3>How Selection Works</h3>
+            <p>Describe whether the effort is iterative, competitive, open-entry, or a phased qualification process.</p>
+          </div>
+          <div class="card">
+            <div class="number">3</div>
+            <h3>What to Expect</h3>
+            <p>Clarify what participants will submit, where events occur, what deliverables matter, and how evaluation is conducted.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="resources">
+      <div class="container">
+        <div class="section-header">
+          <h2>Resources</h2>
+          <p>
+            The source site makes resources easy to scan. Keep each block short, direct, and action-oriented. This is where you link to official documents, slide decks, submission portals, and contact information.
+          </p>
+        </div>
+
+        <div class="resource-grid">
+          <article class="card">
+            <h3>Official Announcement</h3>
+            <p>Provide the formal release document or overview page for the effort.</p>
+            <a class="card-link" href="#">Open Document →</a>
+          </article>
+
+          <article class="card">
+            <h3>Industry Day Slides</h3>
+            <p>Link to a downloadable slide deck or briefing package for interested participants.</p>
+            <a class="card-link" href="#">View Slides →</a>
+          </article>
+
+          <article class="card">
+            <h3>Submission Portal</h3>
+            <p>Direct users to the official portal for correspondence, registration, or proposal submission.</p>
+            <a class="card-link" href="#">Go to Portal →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="container">
+        <div class="section-header">
+          <h2>Frequently Asked Questions</h2>
+          <p>
+            Use expandable FAQ blocks to answer the same five or six questions that every interested visitor is going to ask.
+          </p>
+        </div>
+
+        <div class="faq-grid">
+          <details class="card faq-item" open>
+            <summary>Is this a down-select process?</summary>
+            <div class="answer">You can use this answer to explain whether unsuccessful teams may re-enter future phases or whether the competition remains open across iterations.</div>
+          </details>
+
+          <details class="card faq-item">
+            <summary>Where are official documents posted?</summary>
+            <div class="answer">List the single source of truth for release documents, amendments, updates, and announcements.</div>
+          </details>
+
+          <details class="card faq-item">
+            <summary>How do I contact the team?</summary>
+            <div class="answer">Provide the monitored program inbox and any instructions for administrative versus technical questions.</div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <div class="cta-box">
+          <div>
+            <h2>Ready to Launch?</h2>
+            <p>Replace this with the single most important action you want visitors to take next. Keep it decisive. One sentence is enough.</p>
+          </div>
+          <a class="btn btn-primary" href="#resources">Get Started</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2026 Your Organization • Program Landing Page
+    </div>
+  </footer>
+
+  <script>
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`);
+        });
+      });
+    }, { rootMargin: '-35% 0px -55% 0px', threshold: 0.01 });
+
+    sections.forEach(section => observer.observe(section));
+  </script>
 </body>
 </html>
