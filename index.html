@@ -63,7 +63,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      min-height: 96px;
+      min-height: 70px;
+      height: 70px; /* lock banner height */
       gap: 20px;
     }
 
@@ -80,8 +81,9 @@
     }
 
     .brand-logo {
-      width: 76px;
-      height: 76px;
+      width: 140px;
+      height: 140px;
+      margin-top: 20px; /* pushes logo down visually without growing banner */
       object-fit: contain;
       border-radius: 50%;
       flex-shrink: 0;
@@ -584,8 +586,8 @@
       }
 
       .brand-logo {
-        width: 220px;
-        height: 220px;
+        width: 56px;
+        height: 56px;
       }
 
       .brand-title {
