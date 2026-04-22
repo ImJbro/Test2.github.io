@@ -136,8 +136,24 @@
       overflow: hidden;
     }
 
+    .video-wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 177.77vh; /* 16:9 ratio */
+      height: 100vh;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .video-wrapper iframe {
+      width: 100%;
+      height: 100%;
+    }
+
     .hero-media video,
-    .hero-media img {
+    .hero-media img,
+    .video-wrapper iframe {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -559,9 +575,15 @@
       <div class="hero-media" aria-hidden="true">
         <!-- Replace poster.jpg or video.mp4 with your own assets -->
         <!-- Option A: background video -->
-        <video autoplay muted loop playsinline poster="poster.jpg">
-          <source src="video.mp4" type="video/mp4" />
+        <!-- Put your video file in the SAME folder as this index.html, then set the filename below -->
+        <!-- YouTube Background Video -->
+        <!-- Improved YouTube Background (proper full-bleed cover) -->
+        <!-- Local Background Video (BEST METHOD) -->
+        <video autoplay muted loop playsinline>
+          <source src="hero.mp4" type="video/mp4" />
         </video>
+        <!-- Make sure hero.mp4 is uploaded to your repo in the SAME folder as index.html -->
+        <!-- If your video does NOT show, either the file path is wrong or the file is not uploaded to the repo -->
         <!-- Option B: if you do not want video, comment the <video> above and uncomment the image below -->
         <!-- <img src="poster.jpg" alt=""> -->
       </div>
