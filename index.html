@@ -49,6 +49,13 @@
       margin: 0 auto;
     }
 
+    .nav .container {
+      width: calc(100% - 24px);
+      max-width: none;
+      margin-left: 12px;
+      margin-right: 12px;
+    }
+
     .nav {
       position: sticky;
       top: 0;
@@ -63,31 +70,33 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      min-height: 70px;
-      height: 70px; /* lock banner height */
+      min-height: 84px;
+      height: 84px;
       gap: 20px;
+      overflow: hidden;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
       font-weight: 800;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       font-size: 1rem;
       line-height: 1;
       flex-shrink: 0;
+      margin-left: 0;
     }
 
     .brand-logo {
-      width: 140px;
-      height: 140px;
+      width: 82px;
+      height: 82px;
       object-fit: contain;
       border-radius: 50%;
       flex-shrink: 0;
-      transform: translateY(10px); /* controlled shift without leaving banner */
-      filter: drop-shadow(0 0 12px rgba(255, 140, 40, 0.35)) drop-shadow(0 0 28px rgba(255, 191, 73, 0.18));
+      transform: none;
+      filter: drop-shadow(0 0 14px rgba(255, 140, 40, 0.55)) drop-shadow(0 0 34px rgba(255, 191, 73, 0.26));
     }
 
     .brand-text {
@@ -194,17 +203,18 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: saturate(1.18) contrast(1.08) brightness(0.8);
+      filter: saturate(1.25) contrast(1.04) brightness(1.05);
       transform: scale(1.05);
     }
 
     .hero-overlay {
       position: absolute;
       inset: 0;
+      pointer-events: none;
       background:
-        radial-gradient(circle at 50% 82%, rgba(255, 102, 0, 0.18), transparent 34%),
-        radial-gradient(circle at 22% 18%, rgba(255, 170, 70, 0.14), transparent 24%),
-        linear-gradient(180deg, rgba(20,6,2,0.20) 0%, rgba(20,6,2,0.18) 18%, rgba(20,6,2,0.30) 48%, rgba(20,6,2,0.62) 82%, #090304 100%);
+        radial-gradient(circle at 50% 82%, rgba(255, 102, 0, 0.10), transparent 34%),
+        radial-gradient(circle at 22% 18%, rgba(255, 170, 70, 0.08), transparent 24%),
+        linear-gradient(180deg, rgba(20,6,2,0.06) 0%, rgba(20,6,2,0.05) 30%, rgba(20,6,2,0.18) 68%, #090304 100%);
     }
 
     .hero-content {
@@ -219,11 +229,11 @@
 
     /* NEW: content container background so text is NOT directly on video */
     .hero-content .hero-grid {
-      background: linear-gradient(180deg, rgba(20,6,2,0.85), rgba(20,6,2,0.95));
-      padding: 40px;
+      background: linear-gradient(180deg, rgba(20,6,2,0.62), rgba(20,6,2,0.78));
+      padding: 34px;
       border-radius: 24px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 0 40px rgba(255,90,31,0.15);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 0 32px rgba(255,90,31,0.10);
     }
 
     .eyebrow {
@@ -364,6 +374,13 @@
       max-width: 72ch;
     }
 
+    .quote-layout {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+      align-items: center;
+    }
+
     .quote-card {
       border-left: 4px solid var(--accent);
       background: linear-gradient(180deg, rgba(255, 144, 47, 0.10), rgba(110, 18, 2, 0.16));
@@ -375,6 +392,27 @@
       box-shadow: var(--shadow), var(--glow);
     }
 
+    .quote-image-card {
+      min-height: 260px;
+      border-radius: 28px;
+      border: 1px solid rgba(255, 184, 95, 0.18);
+      background:
+        radial-gradient(circle at center, rgba(255, 158, 28, 0.14), transparent 62%),
+        linear-gradient(180deg, rgba(255, 148, 49, 0.08), rgba(95, 16, 4, 0.16));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      box-shadow: var(--shadow), var(--glow);
+    }
+
+    .quote-image-card img {
+      width: min(280px, 90%);
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 0 18px rgba(255, 140, 40, 0.45));
+    }
+
     .quote-card footer {
       margin-top: 14px;
       color: var(--muted);
@@ -383,7 +421,7 @@
 
     .timeline {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 18px;
     }
 
@@ -568,6 +606,21 @@
       max-width: 60ch;
     }
 
+    .audio-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 2000;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: none;
+      font-weight: 800;
+      cursor: pointer;
+      background: linear-gradient(135deg, rgba(255,90,31,0.92), rgba(255,181,73,0.92));
+      color: #2a0d03;
+      box-shadow: 0 0 18px rgba(255,120,40,0.28);
+    }
+
     .footer {
       border-top: 1px solid var(--line);
       padding: 24px 0 40px;
@@ -584,6 +637,7 @@
       }
 
       .timeline { grid-template-columns: repeat(2, 1fr); }
+      .quote-layout { grid-template-columns: 1fr; }
       .resource-grid,
       .faq-grid,
       .people-grid { grid-template-columns: repeat(2, 1fr); }
@@ -658,7 +712,7 @@
         <video id="heroVideo" autoplay muted loop playsinline>
           <source src="hero.mp4" type="video/mp4" />
         </video>
-        <button id="audioToggle" style="position:absolute; bottom:20px; right:20px; z-index:3; padding:10px 16px; border-radius:999px; border:none; font-weight:800; cursor:pointer; background:linear-gradient(135deg, rgba(255,90,31,0.92), rgba(255,181,73,0.92)); color:#2a0d03; box-shadow:0 0 18px rgba(255,120,40,0.28);">
+        <button id="audioToggle" class="audio-toggle">
           🔊 Enable Sound
         </button>
         <!-- Make sure hero.mp4 is uploaded to your repo in the SAME folder as index.html -->
@@ -671,15 +725,13 @@
       <div class="container hero-content">
         <div class="hero-grid">
           <div>
-            <div class="eyebrow">Now Open • National Challenge</div>
-            <h1>Build the <span>Future</span> Faster</h1>
+            <div class="eyebrow">Draft Request for Solutions • Open Competition</div>
+            <h1>Ignite the <span>Open</span> Ecosystem</h1>
           </div>
 
           <aside class="hero-copy">
             <p>
-              This landing page is styled after the same visual approach: cinematic hero media,
-              dark government-tech aesthetic, large typography, section-based storytelling, and
-              clean call-to-action blocks.
+              Prometheus Flame is a multi-phase challenge to burn down closed, proprietary stovepipes and accelerate open, standards-compliant Autonomy and Mission Systems product lines for dual-use innovation.
             </p>
             <div class="hero-actions">
               <a class="btn btn-primary" href="#resources">View Resources</a>
@@ -688,10 +740,10 @@
 
             <div class="hero-panel" style="margin-top: 22px;">
               <h3>Program Snapshot</h3>
-              <p>Use this box for the quick, persuasive summary that explains what the program is, why it matters, and what action you want visitors to take.</p>
+              <p>Open competition. 3-month phase cadence. Fly-off demonstrations in Dayton, Ohio. Prize pathway with potential follow-on Prototype and Production Other Transaction agreements.</p>
               <div class="stats">
                 <div class="stat">
-                  <div class="value">4</div>
+                  <div class="value">5</div>
                   <div class="label">Challenge Phases</div>
                 </div>
                 <div class="stat">
@@ -699,8 +751,10 @@
                   <div class="label">Launch Year</div>
                 </div>
                 <div class="stat">
-                  <div class="value">$X</div>
-                  <div class="label">Funding Target</div>
+                  <a href="https://uscode.house.gov/view.xhtml?req=(title:10%20section:4022%20edition:prelim)" target="_blank" style="display:block; color:inherit; text-decoration:none;">
+                    <div class="value">10 USC 4022</div>
+                    <div class="label">Follow-On Pathway</div>
+                  </a>
                 </div>
               </div>
             </div>
@@ -714,15 +768,19 @@
         <div class="section-header">
           <h2>Overview</h2>
           <p>
-            The reference site uses a strong, public-facing narrative voice with minimal clutter.
-            Keep this section tight: one short background paragraph, one paragraph on program intent,
-            and one paragraph on what happens next.
+            Prometheus Flame is designed to kindle an open-source community around modular, hardware-agnostic Autonomy and Mission Systems capabilities. The challenge invites hobbyists, academia, non-traditional vendors, and traditional industry to help build a self-sustaining dual-use ecosystem.
           </p>
         </div>
 
-        <div class="quote-card">
-          “Insert a sharp statement here that sounds mission-oriented, urgent, and unmistakably tied to your program.”
-          <footer>— Senior leader, office, or program authority</footer>
+        <div class="quote-layout">
+          <div class="quote-card">
+            “Create an open-source, enthusiast and dual-use-grade learning platform that establishes a vibrant community around standards-compliant Autonomy and Mission Systems product lines.”
+            <footer>— Prometheus Flame Draft Request for Solutions</footer>
+          </div>
+
+          <div class="quote-image-card">
+            <img src="logo.png" alt="Prometheus Flame emblem">
+          </div>
         </div>
       </div>
     </section>
@@ -731,50 +789,47 @@
       <div class="container">
         <div class="section-header">
           <h2>Program Timeline</h2>
-          <p>
-            This mirrors the four-phase card layout on the reference page, but with a more polished reusable structure. Replace dates, statuses, and descriptions with your actual milestones.
-          </p>
         </div>
 
         <div class="timeline">
           <article class="timeline-card">
             <div class="phase">0</div>
-            <div class="status">Completed</div>
+            <div class="status upcoming">Coming Soon</div>
             <h3>Release</h3>
             <time datetime="2026-06-01">June 1, 2026</time>
-            <p>Official challenge announcement, release package, initial guidance, and opening of the vendor information period.</p>
+            <p>Final solicitation release and publication of public-release guidance, intended to start the clock for the challenge once AMS GRA and A-GRA are available.</p>
           </article>
 
           <article class="timeline-card">
             <div class="phase">I</div>
-            <div class="status">Completed</div>
+            <div class="status upcoming">Coming Soon</div>
             <h3>Phase I</h3>
-            <time datetime="2026-07-15">July 15, 2026</time>
-            <p>First iterative event focused on operational performance, manufacturability, and mission execution under defined test conditions.</p>
+            <time datetime="2026-09-01">September 1, 2026</time>
+            <p>Three months after release, teams submit their strongest standards-compliant foundation and demonstrate early open-source implementation maturity.</p>
           </article>
 
           <article class="timeline-card">
             <div class="phase">II</div>
             <div class="status upcoming">Coming Soon</div>
             <h3>Phase II</h3>
-            <time datetime="2026-11-01">Approx. 6 months later</time>
-            <p>Second event expands participation, tightens mission criteria, and incorporates lessons learned from the first phase.</p>
+            <time datetime="2026-12-01">December 1, 2026</time>
+            <p>Three months after Phase I, the challenge expands the ecosystem, improves onboarding, and strengthens public-facing tools, guides, and documentation.</p>
           </article>
 
           <article class="timeline-card">
             <div class="phase">III</div>
-            <div class="status upcoming">Upcoming</div>
+            <div class="status upcoming">Coming Soon</div>
             <h3>Phase III</h3>
-            <time datetime="2027-04-01">Approx. 6 months later</time>
-            <p>Third phase focuses on scalability, integration, and sustained operational performance under mission stress conditions.</p>
+            <time datetime="2027-03-01">March 1, 2027</time>
+            <p>Three months after Phase II, teams mature simulation, COTS flight-test performance, compliance evidence, and extensible example projects.</p>
           </article>
 
           <article class="timeline-card">
             <div class="phase">IV</div>
-            <div class="status upcoming">Final</div>
+            <div class="status upcoming">Coming Soon</div>
             <h3>Phase IV</h3>
-            <time datetime="2027-09-01">Approx. 6 months later</time>
-            <p>Final validation and demonstration phase to confirm readiness, long-term viability, and transition potential into operational use.</p>
+            <time datetime="2027-06-01">June 1, 2027</time>
+            <p>Three months after Phase III, teams compete for prize recognition and potential follow-on pathways to mature, proliferate, and sustain the open ecosystem.</p>
           </article>
         </div>
       </div>
@@ -785,25 +840,25 @@
         <div class="section-header">
           <h2>Participants</h2>
           <p>
-            The live site has dedicated navigation for participants and leaderboard views. If you want that same feel, use cards for eligibility, onboarding, and competition expectations.
+            This is not a typical solicitation. Offerors may enter at any time, whether they are bringing a fresh idea or an existing prototype. Participation in a prior phase is not required.
           </p>
         </div>
 
         <div class="people-grid">
           <div class="card">
             <div class="number">1</div>
-            <h3>Who Can Apply</h3>
-            <p>Explain what types of organizations, teams, or vendors can participate, along with any restrictions or minimum requirements.</p>
+            <h3>Apply</h3>
+            <p>Send entry information, organization details, proof of U.S. or allied ownership/headquarters, and official GitLab account names.</p>
           </div>
           <div class="card">
             <div class="number">2</div>
-            <h3>How Selection Works</h3>
-            <p>Describe whether the effort is iterative, competitive, open-entry, or a phased qualification process.</p>
+            <h3>Compete</h3>
+            <p>Build AMS GRA and/or A-GRA-compliant open-source software, example projects, documentation, and public-facing resources.</p>
           </div>
           <div class="card">
             <div class="number">3</div>
-            <h3>What to Expect</h3>
-            <p>Clarify what participants will submit, where events occur, what deliverables matter, and how evaluation is conducted.</p>
+            <h3>Perform</h3>
+            <p>Demonstrate mission performance, usability, technical implementation, standards compliance, and a credible path to follow-on work.</p>
           </div>
         </div>
       </div>
@@ -814,26 +869,26 @@
         <div class="section-header">
           <h2>Resources</h2>
           <p>
-            The source site makes resources easy to scan. Keep each block short, direct, and action-oriented. This is where you link to official documents, slide decks, submission portals, and contact information.
+            Access key documents, announcements, and materials to understand and participate in the Prometheus Flame Challenge.
           </p>
         </div>
 
         <div class="resource-grid">
           <article class="card">
             <h3>Official Announcement</h3>
-            <p>Provide the formal release document or overview page for the effort.</p>
-            <a class="card-link" href="#">Open Document →</a>
+            <p>Review the official challenge overview, intent, and initial guidance for participants.</p>
+            <a class="card-link" href="https://sam.gov/workspace/contract/opp/68a071f69a1c4ec883b8392c5ae040b1/view" target="_blank">Open Document →</a>
           </article>
 
           <article class="card">
             <h3>Industry Day Slides</h3>
-            <p>Link to a downloadable slide deck or briefing package for interested participants.</p>
+            <p>Download the latest briefing materials covering architecture, expectations, and program direction.</p>
             <a class="card-link" href="#">View Slides →</a>
           </article>
 
           <article class="card">
             <h3>Submission Portal</h3>
-            <p>Direct users to the official portal for correspondence, registration, or proposal submission.</p>
+            <p>Access the official entry point for submissions, coordination, and program engagement.</p>
             <a class="card-link" href="#">Go to Portal →</a>
           </article>
         </div>
@@ -845,24 +900,24 @@
         <div class="section-header">
           <h2>Frequently Asked Questions</h2>
           <p>
-            Use expandable FAQ blocks to answer the same five or six questions that every interested visitor is going to ask.
+            Key details from the draft RFS for interested teams, contributors, and potential offerors.
           </p>
         </div>
 
         <div class="faq-grid">
           <details class="card faq-item" open>
-            <summary>Is this a down-select process?</summary>
-            <div class="answer">You can use this answer to explain whether unsuccessful teams may re-enter future phases or whether the competition remains open across iterations.</div>
+            <summary>Can teams enter after Phase I?</summary>
+            <div class="answer">Yes. The challenge is structured as an open competition. Offerors may enter at any time, and participation in a prior phase is not required.</div>
           </details>
 
           <details class="card faq-item">
-            <summary>Where are official documents posted?</summary>
-            <div class="answer">List the single source of truth for release documents, amendments, updates, and announcements.</div>
+            <summary>What will be evaluated?</summary>
+            <div class="answer">Evaluation focuses on mission performance, usability and onboarding, technical implementation and standards compliance, and risk.</div>
           </details>
 
           <details class="card faq-item">
-            <summary>How do I contact the team?</summary>
-            <div class="answer">Provide the monitored program inbox and any instructions for administrative versus technical questions.</div>
+            <summary>What are early-phase deliverables?</summary>
+            <div class="answer">Competitive early-phase solutions should include open-source implementations, turn-key example projects, public repositories or websites, getting-started guides, documentation, and instructional videos.</div>
           </details>
         </div>
       </div>
@@ -872,8 +927,8 @@
       <div class="container">
         <div class="cta-box">
           <div>
-            <h2>Ready to Launch?</h2>
-            <p>Replace this with the single most important action you want visitors to take next. Keep it decisive. One sentence is enough.</p>
+            <h2>Ready to Ignite?</h2>
+            <p>Enter the competition, review the solicitation, and help build the open-source foundation for next-generation Autonomy and Mission Systems.</p>
           </div>
           <a class="btn btn-primary" href="#resources">Get Started</a>
         </div>
@@ -883,7 +938,7 @@
 
   <footer class="footer">
     <div class="container">
-      © 2026 Your Organization • Program Landing Page
+      © 2026 Department of the Air Force • Prometheus Flame Challenge
     </div>
   </footer>
 
