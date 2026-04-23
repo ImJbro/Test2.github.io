@@ -218,13 +218,12 @@
     }
 
     .hero-content {
-      position: relative;
-      z-index: 2;
-      padding: 130px 0 72px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
       width: 100%;
-
-      /* NEW: pulls content off raw video and puts it on a readable surface */
-      margin-top: 35vh;
+      z-index: 2;
+      padding: 40px 0 40px;
     }
 
     /* NEW: content container background so text is NOT directly on video */
@@ -393,24 +392,21 @@
     }
 
     .quote-image-card {
-      min-height: 260px;
-      border-radius: 28px;
-      border: 1px solid rgba(255, 184, 95, 0.18);
-      background:
-        radial-gradient(circle at center, rgba(255, 158, 28, 0.14), transparent 62%),
-        linear-gradient(180deg, rgba(255, 148, 49, 0.08), rgba(95, 16, 4, 0.16));
+      min-height: 420px;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 28px;
-      box-shadow: var(--shadow), var(--glow);
+      padding: 0;
+      background: none;
+      border: none;
+      box-shadow: none;
     }
 
     .quote-image-card img {
-      width: min(280px, 90%);
+      width: min(600px, 100%);
       height: auto;
       object-fit: contain;
-      filter: drop-shadow(0 0 18px rgba(255, 140, 40, 0.45));
+      filter: drop-shadow(0 0 28px rgba(255, 140, 40, 0.65));
     }
 
     .quote-card footer {
@@ -743,12 +739,12 @@
               <p>Open competition. 3-month phase cadence. Fly-off demonstrations in Dayton, Ohio. Prize pathway with potential follow-on Prototype and Production Other Transaction agreements.</p>
               <div class="stats">
                 <div class="stat">
-                  <div class="value">5</div>
+                  <div class="value">4+</div>
                   <div class="label">Challenge Phases</div>
                 </div>
                 <div class="stat">
-                  <div class="value">2026</div>
-                  <div class="label">Launch Year</div>
+                  <div class="value">June 1, 2026</div>
+                  <div class="label">Launch</div>
                 </div>
                 <div class="stat">
                   <a href="https://uscode.house.gov/view.xhtml?req=(title:10%20section:4022%20edition:prelim)" target="_blank" style="display:block; color:inherit; text-decoration:none;">
@@ -793,7 +789,6 @@
 
         <div class="timeline">
           <article class="timeline-card">
-            <div class="phase">0</div>
             <div class="status upcoming">Coming Soon</div>
             <h3>Release</h3>
             <time datetime="2026-06-01">June 1, 2026</time>
@@ -805,7 +800,6 @@
             <div class="status upcoming">Coming Soon</div>
             <h3>Phase I</h3>
             <time datetime="2026-09-01">September 1, 2026</time>
-            <p>Three months after release, teams submit their strongest standards-compliant foundation and demonstrate early open-source implementation maturity.</p>
           </article>
 
           <article class="timeline-card">
@@ -813,7 +807,6 @@
             <div class="status upcoming">Coming Soon</div>
             <h3>Phase II</h3>
             <time datetime="2026-12-01">December 1, 2026</time>
-            <p>Three months after Phase I, the challenge expands the ecosystem, improves onboarding, and strengthens public-facing tools, guides, and documentation.</p>
           </article>
 
           <article class="timeline-card">
@@ -821,7 +814,6 @@
             <div class="status upcoming">Coming Soon</div>
             <h3>Phase III</h3>
             <time datetime="2027-03-01">March 1, 2027</time>
-            <p>Three months after Phase II, teams mature simulation, COTS flight-test performance, compliance evidence, and extensible example projects.</p>
           </article>
 
           <article class="timeline-card">
@@ -829,7 +821,6 @@
             <div class="status upcoming">Coming Soon</div>
             <h3>Phase IV</h3>
             <time datetime="2027-06-01">June 1, 2027</time>
-            <p>Three months after Phase III, teams compete for prize recognition and potential follow-on pathways to mature, proliferate, and sustain the open ecosystem.</p>
           </article>
         </div>
       </div>
@@ -875,21 +866,21 @@
 
         <div class="resource-grid">
           <article class="card">
-            <h3>Official Announcement</h3>
-            <p>Review the official challenge overview, intent, and initial guidance for participants.</p>
+            <h3>Official Solicitation</h3>
+            <p>Draft Request for Solutions for Prometheus Flame. This multi-phase, open competition seeks open-source, standards-compliant Autonomy and Mission Systems solutions, with prizes and potential follow-on Other Transaction agreements.</p>
             <a class="card-link" href="https://sam.gov/workspace/contract/opp/68a071f69a1c4ec883b8392c5ae040b1/view" target="_blank">Open Document →</a>
           </article>
 
           <article class="card">
-            <h3>Industry Day Slides</h3>
-            <p>Download the latest briefing materials covering architecture, expectations, and program direction.</p>
-            <a class="card-link" href="#">View Slides →</a>
+            <h3>Standards Portal</h3>
+            <p>This is where the AMS GRA and A-GRA standards will be publicly released and maintained for open access.</p>
+            <a class="card-link" href="https://modular-af.github.io/" target="_blank">Open Portal →</a>
           </article>
 
           <article class="card">
-            <h3>Submission Portal</h3>
-            <p>Access the official entry point for submissions, coordination, and program engagement.</p>
-            <a class="card-link" href="#">Go to Portal →</a>
+            <h3>Application</h3>
+            <p>Submit your application and initial interest directly to the Prometheus Flame team.</p>
+            <a class="card-link" href="mailto:aflcmc.open-source.challenge@us.af.mil?cc=justin.brogden.1@us.af.mil&subject=Prometheus%20Flame%20Application">Start Application →</a>
           </article>
         </div>
       </div>
