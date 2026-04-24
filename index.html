@@ -6,20 +6,20 @@
   <title>Prometheus Flame</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #120602;
-      --panel: rgba(255, 140, 40, 0.10);
-      --panel-2: rgba(255, 186, 73, 0.12);
-      --text: #fff4e8;
-      --muted: #e2b98f;
-      --line: rgba(255, 179, 102, 0.18);
+      --bg: #0b0200;
+      --panel: rgba(255, 120, 40, 0.08);
+      --panel-2: rgba(255, 186, 73, 0.10);
+      --text: #fff6ed;
+      --muted: #d9a97f;
+      --line: rgba(255, 179, 102, 0.14);
 
-      /* BLAZING FIRE SCHEME */
-      --accent: #ff5a1f;
-      --accent-2: #ff9f1c;
-      --accent-3: #ffd166;
+      /* SHARPER FIRE SCHEME */
+      --accent: #ff4d1a;
+      --accent-2: #ff8c1a;
+      --accent-3: #ffe0a3;
       --success: #ffd166;
 
       --shadow: 0 24px 70px rgba(0,0,0,0.52);
@@ -203,7 +203,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: saturate(1.25) contrast(1.04) brightness(1.05);
+      filter: saturate(1.35) contrast(1.08) brightness(1.12);
       transform: scale(1.05);
     }
 
@@ -212,9 +212,7 @@
       inset: 0;
       pointer-events: none;
       background:
-        radial-gradient(circle at 50% 82%, rgba(255, 102, 0, 0.10), transparent 34%),
-        radial-gradient(circle at 22% 18%, rgba(255, 170, 70, 0.08), transparent 24%),
-        linear-gradient(180deg, rgba(20,6,2,0.06) 0%, rgba(20,6,2,0.05) 30%, rgba(20,6,2,0.18) 68%, #090304 100%);
+        linear-gradient(180deg, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0.15) 60%, rgba(0,0,0,0.35) 100%);
     }
 
     .hero-content {
@@ -228,11 +226,11 @@
 
     /* NEW: content container background so text is NOT directly on video */
     .hero-content .hero-grid {
-      background: linear-gradient(180deg, rgba(20,6,2,0.62), rgba(20,6,2,0.78));
+      background: linear-gradient(to top, rgba(0,0,0,0.35), rgba(0,0,0,0.05));
       padding: 34px;
       border-radius: 24px;
-      backdrop-filter: blur(6px);
-      box-shadow: 0 0 32px rgba(255,90,31,0.10);
+      backdrop-filter: none;
+      box-shadow: none;
     }
 
     .eyebrow {
@@ -260,11 +258,12 @@
 
     .hero h1 {
       margin: 0;
-      font-size: clamp(3rem, 9vw, 7.25rem);
-      line-height: 0.92;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(3.2rem, 7vw, 6rem);
+      line-height: 0.9;
       letter-spacing: -0.05em;
       text-transform: uppercase;
-      max-width: 9ch;
+      max-width: 10ch;
     }
 
     .hero h1 span {
@@ -272,7 +271,6 @@
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      text-shadow: 0 0 18px rgba(255, 160, 60, 0.14);
     }
 
     .hero-copy {
@@ -391,6 +389,8 @@
       box-shadow: var(--shadow), var(--glow);
     }
 
+    
+
     .quote-image-card {
       min-height: 420px;
       display: flex;
@@ -422,6 +422,7 @@
     }
 
     .timeline-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       position: relative;
       padding: 24px;
       min-height: 290px;
@@ -430,6 +431,11 @@
       border: 1px solid rgba(255, 184, 95, 0.18);
       overflow: hidden;
       box-shadow: var(--shadow), var(--glow);
+    }
+
+    .timeline-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 30px 80px rgba(255,90,31,0.25);
     }
 
     .timeline-card::before {
@@ -496,6 +502,7 @@
     }
 
     .card {
+      backdrop-filter: blur(6px);
       border-radius: 24px;
       padding: 24px;
       background: linear-gradient(180deg, rgba(255, 148, 49, 0.10), rgba(95, 16, 4, 0.16));
@@ -673,9 +680,150 @@
       .btn { width: 100%; }
       section { padding: 72px 0; }
     }
+  /* 🔥 INTENSE Flame Intro Animation */
+    #flameIntro {
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      pointer-events: none;
+      background: radial-gradient(circle at center, rgba(0,0,0,0.95), rgba(0,0,0,1));
+      animation: fadeOutIntro 3.2s ease forwards;
+      overflow: hidden;
+    }
+
+    .flame-layer {
+      position: absolute;
+      inset: 0;
+      filter: blur(55px);
+      mix-blend-mode: screen;
+      opacity: 0.9;
+    }
+
+    .layer-1 {
+      background: linear-gradient(120deg,
+        transparent 0%,
+        rgba(255,60,0,0.8) 25%,
+        rgba(255,140,0,0.9) 40%,
+        rgba(255,220,120,0.8) 55%,
+        rgba(255,90,0,0.8) 70%,
+        transparent 100%
+      );
+      animation: flameSweep 1.6s ease-out forwards;
+    }
+
+    .layer-2 {
+      background: linear-gradient(100deg,
+        transparent 0%,
+        rgba(255,120,0,0.6) 30%,
+        rgba(255,200,80,0.7) 50%,
+        rgba(255,90,0,0.6) 70%,
+        transparent 100%
+      );
+      animation: flameSweep 1.9s ease-out 0.2s forwards;
+    }
+
+    .layer-3 {
+      background: linear-gradient(140deg,
+        transparent 0%,
+        rgba(255,80,0,0.5) 20%,
+        rgba(255,180,60,0.6) 45%,
+        rgba(255,100,0,0.5) 65%,
+        transparent 100%
+      );
+      animation: flameSweep 2.2s ease-out 0.4s forwards;
+    }
+
+    /* 🔥 Ash / Ember particles */
+    .embers {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .embers span {
+      position: absolute;
+      bottom: -20px;
+      width: 6px;
+      height: 6px;
+      background: radial-gradient(circle, #ffd27a, #ff7a1a);
+      border-radius: 50%;
+      opacity: 0.9;
+      animation: rise 3.5s linear infinite;
+      filter: blur(0.5px);
+    }
+
+    /* Randomize positions */
+    .embers span:nth-child(odd) { width: 4px; height: 4px; opacity: 0.7; }
+    .embers span:nth-child(3n) { width: 8px; height: 8px; opacity: 0.5; }
+
+    .embers span:nth-child(1) { left: 5%; animation-delay: 0s; }
+    .embers span:nth-child(2) { left: 15%; animation-delay: 0.3s; }
+    .embers span:nth-child(3) { left: 25%; animation-delay: 0.6s; }
+    .embers span:nth-child(4) { left: 35%; animation-delay: 0.9s; }
+    .embers span:nth-child(5) { left: 45%; animation-delay: 1.2s; }
+    .embers span:nth-child(6) { left: 55%; animation-delay: 1.5s; }
+    .embers span:nth-child(7) { left: 65%; animation-delay: 1.8s; }
+    .embers span:nth-child(8) { left: 75%; animation-delay: 2.1s; }
+    .embers span:nth-child(9) { left: 85%; animation-delay: 2.4s; }
+    .embers span:nth-child(10) { left: 95%; animation-delay: 2.7s; }
+
+    @keyframes rise {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-120vh) scale(0.6);
+        opacity: 0;
+      }
+    }
+
+    @keyframes flameSweep {
+      0% {
+        transform: translateX(-140%) skewX(-12deg) scale(1.1);
+      }
+      50% {
+        transform: translateX(20%) skewX(-8deg) scale(1.15);
+      }
+      100% {
+        transform: translateX(140%) skewX(-10deg) scale(1.05);
+      }
+    }
+
+    @keyframes fadeOutIntro {
+      0% { opacity: 1; }
+      75% { opacity: 1; }
+      100% { opacity: 0; visibility: hidden; }
+    }
+      75% { opacity: 1; }
+      100% { opacity: 0; visibility: hidden; }
+    }
+      70% { opacity: 1; }
+      100% { opacity: 0; visibility: hidden; }
+    }
+
   </style>
 </head>
 <body>
+  <!-- Flame intro overlay -->
+  <div id="flameIntro">
+    <div class="flame-layer layer-1"></div>
+    <div class="flame-layer layer-2"></div>
+    <div class="flame-layer layer-3"></div>
+    <!-- Ash / ember particles -->
+    <div class="embers">
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+    <div class="flame-layer layer-2"></div>
+    <div class="flame-layer layer-3"></div>
+  </div>
   <header class="nav">
     <div class="container nav-inner">
       <a class="brand" href="#top" aria-label="Homepage">
@@ -764,7 +912,7 @@
         <div class="section-header">
           <h2>Overview</h2>
           <p>
-            Prometheus Flame is designed to kindle an open-source community around modular, hardware-agnostic Autonomy and Mission Systems capabilities. The challenge invites hobbyists, academia, non-traditional vendors, and traditional industry to help build a self-sustaining dual-use ecosystem.
+            Prometheus Flame is a live-fire, multi-phase competition to dismantle closed, proprietary pipelines and replace them with an open, modular ecosystem for Autonomy and Mission Systems. Teams iterate fast, publish openly, and prove capability in real fly-off events—turning ideas into deployable, standards-compliant solutions at the speed of software.
           </p>
         </div>
 
@@ -776,6 +924,27 @@
 
           <div class="quote-image-card">
             <img src="logo.png" alt="Prometheus Flame emblem">
+          </div>
+        </div>
+
+        <div style="margin-top:60px;">
+          <div class="section-header">
+            <h2>Problem</h2>
+            <p style="font-size:1.25rem; max-width:800px;">
+              The system we rely on today was not built to move at the speed of modern conflict.
+            </p>
+          </div>
+
+          <div class="card" style="margin-top:20px;">
+            <p>
+              Every modification—no matter how small—triggers costly re-certification cycles, forcing programs to choose between speed and safety. Integration becomes negotiation. Innovation becomes risk. And the pace of delivery falls behind the pace of the threat.
+            </p>
+            <p style="margin-top:16px; font-weight:700; color:#fff;">
+              The result is a system that cannot scale, cannot adapt, and cannot win in a contested, rapidly evolving environment.
+            </p>
+            <p style="margin-top:16px; color:#ffd9b8;">
+              Without a shift to open standards, modular design, and a competitive ecosystem, the Department will continue to invest in systems that are obsolete the moment they are fielded.
+            </p>
           </div>
         </div>
       </div>
@@ -859,9 +1028,6 @@
       <div class="container">
         <div class="section-header">
           <h2>Resources</h2>
-          <p>
-            Access key documents, announcements, and materials to understand and participate in the Prometheus Flame Challenge.
-          </p>
         </div>
 
         <div class="resource-grid">
@@ -890,9 +1056,6 @@
       <div class="container">
         <div class="section-header">
           <h2>Frequently Asked Questions</h2>
-          <p>
-            Key details from the draft RFS for interested teams, contributors, and potential offerors.
-          </p>
         </div>
 
         <div class="faq-grid">
@@ -961,6 +1124,15 @@
         btn.textContent = '🔊 Enable Sound';
       }
     });
+    
+  // Remove flame intro after animation completes
+  window.addEventListener('load', () => {
+    const intro = document.getElementById('flameIntro');
+    setTimeout(() => {
+      if (intro) intro.remove();
+    }, 3000);
+  });
+
   </script>
 </body>
 </html>
