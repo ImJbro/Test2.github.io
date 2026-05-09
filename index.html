@@ -682,6 +682,15 @@
       .btn { width: 100%; }
       section { padding: 72px 0; }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+      #flameIntro { display: none !important; }
+    }
   /* 🔥 INTENSE Flame Intro Animation */
     #flameIntro {
       position: fixed;
@@ -848,7 +857,7 @@
         <video id="heroVideo" autoplay muted loop playsinline>
           <source src="hero.mp4" type="video/mp4" />
         </video>
-        <button id="audioToggle" class="audio-toggle">
+        <button id="audioToggle" class="audio-toggle" aria-pressed="false" aria-label="Enable sound">
           🔊 Enable Sound
         </button>
         <!-- Make sure hero.mp4 is uploaded to your repo in the SAME folder as index.html -->
@@ -1106,16 +1115,22 @@
     const video = document.getElementById('heroVideo');
     const btn = document.getElementById('audioToggle');
 
-    btn.addEventListener('click', () => {
-      if (video.muted) {
-        video.muted = false;
-        video.volume = 1;
-        btn.textContent = '🔇 Mute';
-      } else {
-        video.muted = true;
-        btn.textContent = '🔊 Enable Sound';
-      }
-    });
+    if (video && btn) {
+      btn.addEventListener('click', () => {
+        if (video.muted) {
+          video.muted = false;
+          video.volume = 1;
+          btn.textContent = '🔇 Mute';
+          btn.setAttribute('aria-pressed', 'true');
+          btn.setAttribute('aria-label', 'Mute sound');
+        } else {
+          video.muted = true;
+          btn.textContent = '🔊 Enable Sound';
+          btn.setAttribute('aria-pressed', 'false');
+          btn.setAttribute('aria-label', 'Enable sound');
+        }
+      });
+    }
     
   // Remove flame intro after animation completes
   window.addEventListener('load', () => {
